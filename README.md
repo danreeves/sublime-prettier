@@ -4,6 +4,10 @@ This is a Sublime Text 3 plugin for the [prettier](https://github.com/jlongster/
 
 ## Installation
 
+You need `prettier` installed globally for this plugin to work. See the [installation instructions](https://github.com/jlongster/prettier#usage).
+
+`npm install -g prettier`
+
 ### Recommended
 
 Install via [Package Control](https://packagecontrol.io/) *coming soon*.
