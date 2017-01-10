@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Prettier: Auto format this file",
+        "command": "prettier"
+    }
+]
