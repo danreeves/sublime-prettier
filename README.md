@@ -15,7 +15,7 @@ Install via [Package Control](https://packagecontrol.io/) *coming soon*.
 ### Manually
 
 1. Go to
-    * (Mac OS/OS X): `Users\[username]\Library\Application Support\Sublime Text 3\Packages`
+    * (Mac OS/OS X): `cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/"`
     * (Windows): `C:\Users\[username]\AppData\Roaming\Sublime Text 3\Packages`
 
 2. `git clone git@github.com:danreeves/sublime-prettier.git` or [download](https://github.com/danreeves/sublime-prettier/archive/master.zip) the zip and extract to that location.
