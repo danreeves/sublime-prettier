@@ -1,6 +1,10 @@
 [
-    {
-        "caption": "Prettier: Format this file",
-        "command": "prettier"
-    }
+  {
+    "caption": "Prettier: Format this file",
+    "command": "prettier"
+  },
+  {
+    "caption": "Prettier: Format this selection",
+    "command": "prettier_selection"
+  }
 ]
