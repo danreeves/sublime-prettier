@@ -58,3 +58,11 @@ class PrettierSelectionCommand(sublime_plugin.TextCommand):
                 report_error(proc.returncode, err)
             else:
                 do_replace(edit, self.view, region, prettier_output)
+
+# Prettier event listeners
+class PrettierListener(sublime_plugin.EventListener):
+    def on_pre_save(self, view):
+        # Run the prettier sublime command on save if autoformat is not unset
+        autoformat = settings.get('autoformat')
+        if autoformat != False:
+            view.run_command('prettier')
