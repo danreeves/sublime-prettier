@@ -1,6 +1,9 @@
-from subprocess import Popen, check_output, CalledProcessError, PIPE
+import subprocess
+import platform
 from sublime import Region, load_settings
 import sublime_plugin
+
+IS_WINDOWS = platform.system() == 'Windows'
 
 setting_keys = [
     {'key': 'printWidth', 'option': '--print-width'},
@@ -40,9 +43,12 @@ class PrettierCommand(sublime_plugin.TextCommand):
         command = ['prettier'] + options + [path]
         region = Region(0, self.view.size())
         try:
-            prettier_output = check_output(command)
+            prettier_output = subprocess.check_output(
+                command,
+                shell=IS_WINDOWS
+            )
             do_replace(edit, self.view, region, prettier_output)
-        except CalledProcessError as e:
+        except subprocess.CalledProcessError as e:
             report_error(e.returncode, e.output)
 
 
@@ -52,7 +58,13 @@ class PrettierSelectionCommand(sublime_plugin.TextCommand):
         command = ['prettier'] + options + ['--stdin']
         for region in self.view.sel():
             text = self.view.substr(region)
-            proc = Popen(command, stdin=PIPE, stderr=PIPE, stdout=PIPE)
+            proc = subprocess.Popen(
+                command,
+                stdin=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                shell=IS_WINDOWS
+            )
             prettier_output, err = proc.communicate(str.encode(text))
             if err or proc.returncode != 0:
                 report_error(proc.returncode, err)
