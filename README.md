@@ -1,3 +1,5 @@
+> [This was a quick prototype but there's another package on Package Control. Use that one instead](https://packagecontrol.io/packages/JsPrettier). Thanks 👋
+
 # Prettier
 
 This is a Sublime Text 3 plugin for the [prettier](https://github.com/jlongster/prettier) JavaScript formatter.
