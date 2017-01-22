@@ -19,11 +19,9 @@ options = []
 
 # convert the sublime-settings into cli args
 for setting in setting_keys:
-    opt = settings.get(setting['key'], False)
-    if opt:
+    if settings.has(setting['key']):
         options.append(setting['option'])
-        if not isinstance(opt, bool):
-            options.append(str(opt))
+        options.append(str(settings.get(setting['key'], False)).lower())
 
 
 def do_replace(edit, view, region, replacement):
