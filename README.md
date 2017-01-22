@@ -36,7 +36,7 @@ Open the command palette and search for `Prettier: Auto format this file`
 
 The plugin takes the same settings and the `prettier` tool. See the [`prettier` repo](https://github.com/jlongster/prettier/blob/master/src/options.js) or [this repo](https://github.com/danreeves/sublime-prettier/blob/master/Prettier.sublime-settings). You can configure them in Sublime at `Preferences > Package Settings > Prettier`.
 
-You can turn off the auto formatting on save by setting `autoformat` to `false`.
+You can turn on the auto formatting on save by setting `autoformat` to `true`.
 
 For example:
 
