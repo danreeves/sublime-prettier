@@ -1,5 +1,6 @@
 import subprocess
 import platform
+import os
 from sublime import Region, load_settings
 import sublime_plugin
 
@@ -58,6 +59,14 @@ def prettify_code(edit, view, region):
 # Run prettier an a file
 class PrettierCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        extensions = settings.get('extensions')
+
+        # Check if the file extension is allowed
+        file_extension = os.path.splitext(self.view.file_name())[1][1:]
+        if extensions and file_extension not in extensions:
+            print('Prettier can\'t format .%s files' % file_extension)
+            return
+
         region = Region(0, self.view.size())
         prettify_code(edit, self.view, region)
 

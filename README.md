@@ -45,6 +45,9 @@ For example:
   // Turns on/off autoformatting on save
   "autoformat": true,
 
+  // Only attempt to format files with extensions set there
+  "extensions": ["js", "jsx"],
+
   // Fit code within this line limit
   "printWidth": 80,
 

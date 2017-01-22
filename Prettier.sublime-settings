@@ -1,4 +1,5 @@
 {
+  "extensions": ["js", "jsx"],
   "autoformat": false,
   "printWidth": 80,
   "tabWidth": 2,
