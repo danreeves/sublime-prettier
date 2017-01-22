@@ -15,15 +15,6 @@ setting_keys = [
     {'key': 'bracketSpacing', 'option': '--bracket-spacing'},
 ]
 settings = load_settings('Prettier.sublime-settings')
-options = []
-
-# convert the sublime-settings into cli args
-for setting in setting_keys:
-    opt = settings.get(setting['key'], False)
-    if opt:
-        options.append(setting['option'])
-        if not isinstance(opt, bool):
-            options.append(str(opt))
 
 
 def do_replace(edit, view, region, replacement):
@@ -37,8 +28,13 @@ def report_error(returncode, err=None):
         print(err)
 
 
+def make_flag(setting):
+    return '%s=%s' % (setting['option'], str(settings.get(setting['key'], False)).lower())
+
+
 # Calls prettier on the given region and replaces code
 def prettify_code(edit, view, region):
+    options = [make_flag(setting) for setting in setting_keys]
     command = ['prettier'] + options + ['--stdin']
     code = view.substr(region)
     proc = subprocess.Popen(
