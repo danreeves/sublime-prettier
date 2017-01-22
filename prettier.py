@@ -35,6 +35,7 @@ def report_error(returncode, err=None):
     if err:
         print(err)
 
+
 # Calls prettier on the given region and replaces code
 def prettify_code(edit, view, region):
     command = ['prettier'] + options + ['--stdin']
@@ -64,9 +65,7 @@ class PrettierCommand(sublime_plugin.TextCommand):
 # Run prettier on a selection in a file
 class PrettierSelectionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        command = ['prettier'] + options + ['--stdin']
         for region in self.view.sel():
-            text = self.view.substr(region)
             prettify_code(edit, self.view, region)
 
 
@@ -75,5 +74,5 @@ class PrettierListener(sublime_plugin.EventListener):
     def on_pre_save(self, view):
         # Run the prettier sublime command on save if autoformat is set to true
         autoformat = settings.get('autoformat')
-        if autoformat == True:
+        if autoformat is True:
             view.run_command('prettier')
