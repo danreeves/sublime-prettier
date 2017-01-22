@@ -63,7 +63,8 @@ class PrettierCommand(sublime_plugin.TextCommand):
 
         # Check if the file extension is allowed
         file_extension = os.path.splitext(self.view.file_name())[1][1:]
-        if extensions and not file_extension in extensions:
+        if extensions and file_extension not in extensions:
+            print('Prettier can\'t format .%s files' % file_extension)
             return
 
         region = Region(0, self.view.size())
