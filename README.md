@@ -1,4 +1,6 @@
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+See alternative: [Package Control](https://packagecontrol.io/packages/JsPrettier) | [Repo](https://github.com/jonlabelle/SublimeJsPrettier)
 ___
 
 # Prettier
