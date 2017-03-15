@@ -1,3 +1,6 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+___
+
 # Prettier
 
 This is a Sublime Text 3 plugin for the [prettier](https://github.com/jlongster/prettier) JavaScript formatter.
