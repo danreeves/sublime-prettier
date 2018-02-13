@@ -5,6 +5,6 @@
   "tabWidth": 2,
   "useFlowParser": false,
   "singleQuote": false,
-  "trailingComma": false,
+  "trailingComma": "none",
   "bracketSpacing": true
 }

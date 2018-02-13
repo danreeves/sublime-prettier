@@ -32,9 +32,22 @@ def make_flag(setting):
     return '%s=%s' % (setting['option'], str(settings.get(setting['key'], False)).lower())
 
 
+def find_config_path(file_name):
+    process = subprocess.Popen(['prettier', '--find-config-path', file_name],
+                               stdout=subprocess.PIPE)
+    output = process.communicate()[0]
+    try:
+        return output.decode('utf-8').splitlines()[0]
+    except IndexError:
+        return None
+
+
 # Calls prettier on the given region and replaces code
-def prettify_code(edit, view, region):
-    options = [make_flag(setting) for setting in setting_keys]
+def prettify_code(edit, view, config_file_name, region):
+    if config_file_name:
+        options = ['--config', config_file_name]
+    else:
+        options = [make_flag(setting) for setting in setting_keys]
     command = ['prettier'] + options + ['--stdin']
     code = view.substr(region)
     proc = subprocess.Popen(
@@ -56,15 +69,17 @@ def prettify_code(edit, view, region):
 class PrettierCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         extensions = settings.get('extensions')
+        file_name = self.view.file_name()
 
         # Check if the file extension is allowed
-        file_extension = os.path.splitext(self.view.file_name())[1][1:]
+        file_extension = os.path.splitext(file_name)[1][1:]
         if extensions and file_extension not in extensions:
             print('Prettier can\'t format .%s files' % file_extension)
             return
 
+        config_file_name = find_config_path(file_name) if file_name else None
         region = Region(0, self.view.size())
-        prettify_code(edit, self.view, region)
+        prettify_code(edit, self.view, config_file_name, region)
 
 
 # Run prettier on a selection in a file
