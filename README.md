@@ -46,6 +46,8 @@ The plugin takes the same settings and the `prettier` tool. See the [`prettier` 
 
 You can turn on the auto formatting on save by setting `autoformat` to `true`.
 
+By default prettier config is searched by `prettier --find-config-path`, but you can define custom locations to search through `configLocations`.
+
 For example:
 
 ```js
@@ -72,6 +74,9 @@ For example:
   "trailingComma": false,
 
   // Controls the printing of spaces inside array and objects
-  "bracketSpacing": true
+  "bracketSpacing": true,
+
+  // Try prettier config in the user's home folder and in current opened folder
+  "configLocations": ["${home_path}/.prettierrc", "${folder}/.prettierrc"]
 }
 ```

@@ -1,7 +1,7 @@
 import subprocess
 import platform
 import os
-from sublime import Region, load_settings
+from sublime import Region, load_settings, expand_variables
 import sublime_plugin
 
 IS_WINDOWS = platform.system() == 'Windows'
@@ -32,14 +32,22 @@ def make_flag(setting):
     return '%s=%s' % (setting['option'], str(settings.get(setting['key'], False)).lower())
 
 
-def find_config_path(file_name):
+def find_config_path(file_name, variables):
     process = subprocess.Popen(['prettier', '--find-config-path', file_name],
                                stdout=subprocess.PIPE)
     output = process.communicate()[0]
     try:
-        return output.decode('utf-8').splitlines()[0]
+        path = output.decode('utf-8').splitlines()[0]
     except IndexError:
-        return None
+        path = None
+    if path:
+        return path
+    config_locations = settings.get('configLocations', [])
+    for path in config_locations:
+        path = expand_variables(path, variables)
+        if os.path.isfile(path):
+            return path
+    return None
 
 
 # Calls prettier on the given region and replaces code
@@ -77,7 +85,9 @@ class PrettierCommand(sublime_plugin.TextCommand):
             print('Prettier can\'t format .%s files' % file_extension)
             return
 
-        config_file_name = find_config_path(file_name) if file_name else None
+        variables = dict(self.view.window().extract_variables())
+        variables.update({'home_path': os.path.expanduser('~')})
+        config_file_name = find_config_path(file_name, variables) if file_name else None
         region = Region(0, self.view.size())
         prettify_code(edit, self.view, config_file_name, region)
 
