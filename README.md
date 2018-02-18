@@ -13,10 +13,6 @@ You need `prettier` installed globally for this plugin to work. See the [install
 
 `npm install -g prettier`
 
-### Recommended
-
-Install via [Package Control](https://packagecontrol.io/) *coming soon*.
-
 ### Manually
 
 1. Go to
