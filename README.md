@@ -42,7 +42,7 @@ You can add [custom key bindings](https://www.sublimetext.com/docs/3/settings.ht
 
 ## Configuration
 
-The plugin takes the same settings and the `prettier` tool. See the [`prettier` repo](https://github.com/jlongster/prettier/blob/master/src/options.js) or [this repo](https://github.com/danreeves/sublime-prettier/blob/master/Prettier.sublime-settings). You can configure them in Sublime at `Preferences > Package Settings > Prettier`.
+The plugin takes the same settings and the `prettier` tool. See the [`prettier` repo](https://github.com/jlongster/prettier/blob/master/docs/options.md) or [this repo](https://github.com/danreeves/sublime-prettier/blob/master/Prettier.sublime-settings). You can configure them in Sublime at `Preferences > Package Settings > Prettier`.
 
 You can turn on the auto formatting on save by setting `autoformat` to `true`.
 
